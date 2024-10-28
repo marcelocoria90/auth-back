@@ -1,5 +1,5 @@
 import bcrypt from 'bcryptjs'
-import generateToken from '../../utils/varios/generateToken.js'
+import generateToken from '../../utils/helpers/generateToken.js'
 import { authQueries } from '../../utils/services/auth.service.js'
 
 export class AuthModel {

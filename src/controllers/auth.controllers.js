@@ -1,8 +1,8 @@
 // import generateToken from '../utils/generateToken.js'
 import { loginSchema, registerSchema } from '../../utils/schemas/authSchema.js'
 import { ZodError } from 'zod'
-import { formatError } from '../../utils/varios/formatError.js'
-import logger from '../../utils/varios/logger.js'
+import { formatError } from '../../utils/helpers/formatError.js'
+import logger from '../../utils/helpers/logger.js'
 
 export class AuthController {
   constructor ({ model }) {
