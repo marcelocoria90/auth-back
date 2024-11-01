@@ -12,7 +12,7 @@ importers:
         specifier: 2.4.3
         version: 2.4.3
       cookie-parser:
-        specifier: ^1.4.7
+        specifier: 1.4.7
         version: 1.4.7
       cors:
         specifier: 2.8.5

@@ -40,7 +40,7 @@ export class AuthModel {
         return { error: 'Invalid credentials' }
       }
 
-      const token = generateToken({ username: user.USERNAME, role: user.ROLE, email: user.EMAIL })
+      const token = generateToken({ username: user.USERNAME, role: user.ROLE, email: user.EMAIL, status: user.ESTADO })
 
       const data = { ok: true, token }
 
