@@ -1,0 +1,33 @@
+{
+	"name": "auth-back",
+	"version": "1.0.0",
+	"main": "app.js",
+	"type": "module",
+	"repository": "https://github.com/marcelocoria90/auth-back",
+	"author": "marcelo.coria <coria.marcelo.90@gmil.com>",
+	"license": "MIT",
+	"scripts": {
+		"start": "node ./src/app.js",
+		"dev": "node --watch server.js"
+	},
+	"dependencies": {
+		"bcryptjs": "2.4.3",
+		"cookie-parser": "1.4.7",
+		"cors": "2.8.5",
+		"dotenv": "16.4.5",
+		"express": "4.21.1",
+		"helmet": "8.0.0",
+		"jsonwebtoken": "9.0.2",
+		"morgan": "1.10.0",
+		"oracledb": "6.6.0",
+		"winston": "3.15.0",
+		"zod": "3.23.8"
+	},
+	"devDependencies": {
+		"standard": "17.1.2",
+		"uuid": "11.0.2"
+	},
+	"eslintConfig": {
+		"extends": "standard"
+	}
+}
