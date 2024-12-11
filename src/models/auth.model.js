@@ -30,23 +30,26 @@ export class AuthModel {
     try {
       const result = await authQueries.getUser(credentials)
 
+      
       if (result.rows.length === 0) {
         return { error: 'Invalid credentials' }
       }
       const user = result.rows[0]
 
-      const isValidPassword = await bcrypt.compare(String(password), user?.PASSWORD)
+      const isValidPassword = bcrypt.compare(password, user?.PASSWORD)
+
       if (!isValidPassword) {
         return { error: 'Invalid credentials' }
       }
 
-      const token = generateToken({ username: user.USERNAME, role: user.ROLE, email: user.EMAIL, status: user.ESTADO })
+      const { token } = generateToken({ id: user.ID, username: user.USERNAME, role: user.ROLE, email: user.EMAIL, status: user.ESTADO })
 
-      const data = { ok: true, token }
+      const data = { ok: true, accesToken: token }
 
       return { data }
     } catch (e) {
       console.error('🚨 errorModel', e)
+      throw e
     }
   }
 }

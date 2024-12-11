@@ -24,7 +24,8 @@
 		"zod": "3.23.8"
 	},
 	"devDependencies": {
-		"standard": "17.1.2"
+		"standard": "17.1.2",
+		"uuid": "11.0.2"
 	},
 	"eslintConfig": {
 		"extends": "standard"

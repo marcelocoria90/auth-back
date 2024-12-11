@@ -7,11 +7,13 @@ export default ({ model }) => {
 
   const authController = new AuthController({ model })
 
-  authRouter.get('/', auth, authController.health)
+  authRouter.get('/health', authController.health)
+
+  authRouter.get('/session', auth, authController.session)
 
   authRouter.post('/register', authController.register)
-  authRouter.get('/login', authController.login)
-  authRouter.get('/logout', authController.logout)
+  authRouter.post('/login', authController.login)
+  authRouter.post('/logout', authController.logout)
 
   return authRouter
 }

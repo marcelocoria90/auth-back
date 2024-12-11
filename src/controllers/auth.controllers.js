@@ -1,4 +1,3 @@
-// import generateToken from '../utils/generateToken.js'
 import { loginSchema, registerSchema } from '../../utils/schemas/authSchema.js'
 import { ZodError } from 'zod'
 import { formatError } from '../../utils/helpers/formatError.js'
@@ -20,14 +19,29 @@ export class AuthController {
     }
   }
 
+  session = async ( req, res, next) => {
+    try{
+      const { session } = req
+
+      if (session) return res.status(200).json(session)
+
+      next()
+
+    }catch(e){
+      console.log('⛔e',e)
+      next(e)
+    }
+  }
+
   register = async (req, res, next) => {
     const credentials = req.body
+    console.log('🧪credentials', credentials)
     try {
       const payload = registerSchema.parse(credentials)
 
       const { error } = await this.authModel.register(payload)
 
-      if (error) return res.status(401).json({ ok: false, code: 401, error })
+      if (error) return res.status(401).json({ ok: false, code: 401, message: error })
 
       return res.status(200).json({ ok: true, message: 'User created' })
     } catch (e) {
@@ -47,16 +61,21 @@ export class AuthController {
     const credentials = req.body
     try {
       const payload = loginSchema.parse(credentials)
-      const { error, data } = await this.authModel.login(payload)
-
+      const { error, data } = await this.authModel.login(payload) 
+      
       if (error) return res.status(401).json({ ok: false, code: 401, error })
 
-      res.cookie('access_token', data.token, {
+      const expires = new Date(Date.now() + parseInt(process.env.JWT_EXPIRES_IN) * 1000)
+        
+      res.cookie('access_token', data.accesToken, {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
         sameSite: 'none',
-        maxAge: 1000 * 60 * 60 // 1 hour
+        expires
       })
+
+      console.log('🗽 data: ', data)
+
       return res.status(200).json({ data })
     } catch (e) {
       console.log('🚨 errorController', e)
