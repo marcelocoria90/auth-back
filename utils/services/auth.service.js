@@ -42,7 +42,6 @@ export const authQueries = {
   },
   getUser: async (credentials) => {
     const { username } = credentials
-    console.log('🧪username', username)
     try {
       const columns = 'us_iduser AS id, us_username AS username, us_password AS password, us_mail AS email, ro_description AS role, st_description AS estado'
       const query = `SELECT ${columns} FROM ${process.env.TABLA_USERS}
