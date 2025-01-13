@@ -14,7 +14,7 @@ const PORT = process.env.PORT || 3000
 
 export const createApp = ({ model }) => {
   const app = express()
-  
+
   const corsOptions = {
     origin: 'http://localhost:3000',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
@@ -24,7 +24,7 @@ export const createApp = ({ model }) => {
   app.use(cors(corsOptions))
 
   app.disable('x-powered-by')
-  app.use(helmet())                 
+  app.use(helmet())
   app.use(json())
   app.use(cookieParser())
   app.use(express.urlencoded({ extended: false }))
