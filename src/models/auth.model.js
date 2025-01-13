@@ -30,7 +30,6 @@ export class AuthModel {
     try {
       const result = await authQueries.getUser(credentials)
 
-      
       if (result.rows.length === 0) {
         return { error: 'Invalid credentials' }
       }

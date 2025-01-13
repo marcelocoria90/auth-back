@@ -19,16 +19,15 @@ export class AuthController {
     }
   }
 
-  session = async ( req, res, next) => {
-    try{
+  session = async (req, res, next) => {
+    try {
       const { session } = req
 
       if (session) return res.status(200).json(session)
 
       next()
-
-    }catch(e){
-      console.log('⛔e',e)
+    } catch (e) {
+      console.log('⛔e', e)
       next(e)
     }
   }
@@ -45,7 +44,7 @@ export class AuthController {
 
       return res.status(200).json({ ok: true, message: 'User created' })
     } catch (e) {
-      console.log('🚨 errorController', e)
+      // console.log('🚨 errorController', e)
       if (e instanceof ZodError) {
         const errors = formatError(e)
         res.status(422).json({ errors })
@@ -61,12 +60,12 @@ export class AuthController {
     const credentials = req.body
     try {
       const payload = loginSchema.parse(credentials)
-      const { error, data } = await this.authModel.login(payload) 
-      
+      const { error, data } = await this.authModel.login(payload)
+
       if (error) return res.status(401).json({ ok: false, code: 401, error })
 
       const expires = new Date(Date.now() + parseInt(process.env.JWT_EXPIRES_IN) * 1000)
-        
+
       res.cookie('access_token', data.accesToken, {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
